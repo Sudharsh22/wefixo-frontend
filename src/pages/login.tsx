@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import loginVideo from "../assets/videos/coke-login.mp4";
-import cokeLogo from "../assets/image/coke-logo.jpeg";
 import { getDefaultRoute, getStoredUser, signIn } from "../utils/auth";
 
 export default function Login() {
@@ -47,10 +46,13 @@ export default function Login() {
 
       <div className="relative z-10 flex h-full items-center justify-center">
         <div className="w-[450px] rounded-3xl border border-white/20 bg-black/30 p-10 shadow-2xl backdrop-blur-md">
-          <img src={cokeLogo} alt="Coca Cola" className="mx-auto mb-6 h-28 w-28 rounded-xl object-cover" />
+          {/* WEFIXO Brand Emblem */}
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-red-600/50 bg-gradient-to-br from-red-950 to-black text-[#ff1e27] shadow-[0_0_25px_rgba(255,30,39,0.5)] font-black text-2xl">
+            WF
+          </div>
 
-          <h1 className="text-center text-5xl font-bold text-red-500">WEFIXO</h1>
-          <p className="mt-3 text-center text-lg text-gray-200">Smart Factory Platform</p>
+          <h1 className="text-center text-4xl font-black text-red-500">WEFIXO</h1>
+          <p className="mt-2 text-center text-sm font-semibold tracking-wider text-gray-300 uppercase">WEFIXO Smart Factory AI</p>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-4">
             <input

@@ -74,28 +74,28 @@ const hourlyData = [
 const workOrders: WorkOrderRow[] = [
   {
     id: "WO-1042",
-    product: "Coca-Cola Zero Sugar",
+    product: "Smart Line Unit A (500ml)",
     plannedQty: 120000,
     producedQty: 112500,
     status: "In Progress",
   },
   {
     id: "WO-1048",
-    product: "Coca-Cola Classic",
+    product: "Smart Line Unit B (330ml)",
     plannedQty: 95000,
     producedQty: 89600,
     status: "Ready",
   },
   {
     id: "WO-1051",
-    product: "Sprite Lemon",
+    product: "Smart Line Unit C (250ml)",
     plannedQty: 88000,
     producedQty: 79100,
     status: "In Progress",
   },
   {
     id: "WO-1056",
-    product: "Fanta Orange",
+    product: "Smart Line Unit D (Packaging)",
     plannedQty: 76000,
     producedQty: 70200,
     status: "Delayed",
@@ -117,7 +117,7 @@ export default function Production() {
         <PageHeader
           eyebrow="Production intelligence"
           title="Production Operations"
-          description="Monitor throughput, quality, and work order execution across the Coca-Cola factory floor."
+          description="Monitor throughput, quality, and work order execution across the WEFIXO Smart Factory AI floor."
           badge="Bottling line 2 is performing 4.1% above plan"
         />
 

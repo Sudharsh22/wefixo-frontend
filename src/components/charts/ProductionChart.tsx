@@ -40,9 +40,9 @@ export default function ProductionChart({ data }: Props) {
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
-              <linearGradient id="cokeRedGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#f40009" stopOpacity={0.45} />
-                <stop offset="95%" stopColor="#f40009" stopOpacity={0.0} />
+              <linearGradient id="wefixoRedGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#ff1e27" stopOpacity={0.45} />
+                <stop offset="95%" stopColor="#ff1e27" stopOpacity={0.0} />
               </linearGradient>
             </defs>
             <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" vertical={false} />
@@ -61,7 +61,7 @@ export default function ProductionChart({ data }: Props) {
             <Tooltip
               contentStyle={{
                 backgroundColor: "rgba(15, 23, 42, 0.95)",
-                borderColor: "rgba(244, 0, 9, 0.4)",
+                borderColor: "rgba(255, 30, 39, 0.4)",
                 borderRadius: "16px",
                 color: "#ffffff",
                 boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
@@ -74,12 +74,12 @@ export default function ProductionChart({ data }: Props) {
             <Area
               type="monotone"
               dataKey="production"
-              stroke="#f40009"
+              stroke="#ff1e27"
               strokeWidth={3.5}
               fillOpacity={1}
-              fill="url(#cokeRedGradient)"
-              dot={{ r: 5, fill: "#f40009", stroke: "#ffffff", strokeWidth: 2 }}
-              activeDot={{ r: 8, fill: "#f40009", stroke: "#ffffff", strokeWidth: 3, className: "coke-glow" }}
+              fill="url(#wefixoRedGradient)"
+              dot={{ r: 5, fill: "#ff1e27", stroke: "#ffffff", strokeWidth: 2 }}
+              activeDot={{ r: 8, fill: "#ff1e27", stroke: "#ffffff", strokeWidth: 3, className: "wefixo-glow" }}
             />
           </AreaChart>
         </ResponsiveContainer>

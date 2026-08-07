@@ -1,141 +1,85 @@
-import { Activity, ArrowRight, Factory, ShieldCheck, Sparkles, Video, Zap } from "lucide-react";
-import heroVideo from "../../assets/videos/coke-dashboard.mp4";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 export default function DashboardHero() {
-  const handleScrollToOperations = () => {
-    const kpiSection = document.getElementById("kpi-section");
-    if (kpiSection) {
-      kpiSection.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.scrollTo({ top: 450, behavior: "smooth" });
-    }
-  };
+  const [selectedBrand, setSelectedBrand] = useState("All");
 
   return (
-    <div className="relative mb-8 w-full overflow-hidden rounded-3xl border border-blue-500/20 bg-slate-950/80 shadow-[0_0_50px_rgba(15,23,42,0.8)] backdrop-blur-xl transition-all duration-300">
-      
-      {/* Background Manufacturing Video */}
-      <div className="absolute inset-0 overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="h-full w-full object-cover scale-[1.02] filter brightness-95 contrast-[1.05]"
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+    <div className="mb-6 w-full rounded-2xl border border-red-950/90 bg-[#060204] p-4 md:p-5 shadow-2xl font-sans">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         
-        {/* Dark Overlay (65% Opacity for Readability) */}
-        <div className="absolute inset-0 bg-slate-950/65 backdrop-blur-[1px]" />
-        
-        {/* Dark Blue & Black Mesh Gradient Lighting */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-blue-950/50 to-slate-950/80 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(37,99,235,0.15),_transparent_50%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,_rgba(220,38,38,0.15),_transparent_50%)] pointer-events-none" />
-      </div>
+        {/* Left Side: Brand Header */}
+        <div className="flex items-center gap-6">
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-[#ff1e27] drop-shadow-[0_0_15px_rgba(255,30,39,0.6)]">
+              WEFIXO
+            </h1>
+            <p className="text-[10px] font-extrabold tracking-[0.25em] text-gray-300 uppercase mt-0.5">
+              SMART FACTORY AI
+            </p>
+          </div>
+        </div>
 
-      {/* Hero Content Container */}
-      <div className="relative z-10 p-6 sm:p-10 lg:p-12">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+        {/* Right Side: Metrics & Filter Bar */}
+        <div className="flex flex-wrap items-center gap-4 sm:gap-6 lg:justify-end">
           
-          {/* Main Content Area */}
-          <div className="max-w-3xl space-y-6">
-            
-            {/* Status Badges Row */}
-            <div className="flex flex-wrap items-center gap-3">
-              {/* Factory Online Status Badge */}
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-400 backdrop-blur-md shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
-                </span>
-                <span>Factory Online</span>
-              </div>
-
-              {/* Live Video Tag */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3.5 py-1.5 text-xs font-medium text-blue-300 backdrop-blur-md">
-                <Video className="h-3.5 w-3.5 text-blue-400 animate-pulse" />
-                <span>Live Feed • Bottling Operations</span>
-              </div>
-
-              {/* Plant Tag */}
-              <div className="hidden sm:inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-slate-300 backdrop-blur-md">
-                <Factory className="h-3.5 w-3.5 text-red-400" />
-                <span>Smart Plant #04</span>
-              </div>
-            </div>
-
-            {/* Title & Subtitle */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.35em] text-blue-400">
-                <Sparkles className="h-3.5 w-3.5 text-blue-400" />
-                <span>Manufacturing Intelligence</span>
-              </div>
-              <h1 className="text-4xl font-extrabold tracking-tight text-white drop-shadow-lg sm:text-5xl lg:text-6xl">
-                Coca-Cola Smart Factory
-              </h1>
-              <p className="max-w-2xl text-base font-medium leading-relaxed text-slate-300 sm:text-lg lg:text-xl">
-                Real-time production monitoring and AI-powered factory insights.
+          {/* Metric 1: Sum of Units Sold */}
+          <div className="flex items-center gap-4 rounded-xl border border-red-950/80 bg-[#0c0305] px-4 py-2.5 shadow-inner">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-gray-300">
+                Sum of Units Produced
+              </p>
+              <p className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                2,588,500
               </p>
             </div>
-
-            {/* Glowing CTA Button */}
-            <div className="pt-2">
-              <button
-                onClick={handleScrollToOperations}
-                className="group relative inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-red-600 px-7 py-3.5 text-base font-semibold text-white shadow-[0_0_25px_rgba(37,99,235,0.4)] transition-all duration-300 hover:shadow-[0_0_35px_rgba(220,38,38,0.5)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-              >
-                <span>View Live Operations</span>
-                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                <span className="absolute -inset-0.5 -z-10 rounded-2xl bg-gradient-to-r from-blue-500 to-red-500 opacity-40 blur-md transition-all duration-300 group-hover:opacity-75" />
-              </button>
-            </div>
-
+            {/* Red Sparkline */}
+            <svg className="h-8 w-20 text-[#ff1e27]" viewBox="0 0 100 30" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M0 20 Q 15 5, 30 18 T 60 10 T 80 22 T 100 8" strokeLinecap="round" />
+            </svg>
           </div>
 
-          {/* Glassmorphism Quick Metrics Cards */}
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:flex lg:flex-col lg:gap-3 lg:w-72">
-            <div className="group rounded-2xl border border-white/10 bg-slate-900/50 p-4 transition-all duration-300 hover:border-blue-500/40 hover:bg-slate-900/70 backdrop-blur-md shadow-lg">
-              <div className="flex items-center justify-between text-xs text-slate-400">
-                <span className="font-medium">Overall OEE</span>
-                <Activity className="h-4 w-4 text-emerald-400" />
-              </div>
-              <div className="mt-2 flex items-baseline justify-between">
-                <span className="text-2xl font-bold text-white">98.4%</span>
-                <span className="text-xs font-semibold text-emerald-400">+1.2%</span>
-              </div>
+          {/* Metric 2: Sum of Total Sales */}
+          <div className="flex items-center gap-4 rounded-xl border border-red-950/80 bg-[#0c0305] px-4 py-2.5 shadow-inner">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-gray-300">
+                Sum of Total Yield Value
+              </p>
+              <p className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                1.16M
+              </p>
             </div>
+            {/* Red Sparkline */}
+            <svg className="h-8 w-20 text-[#ff1e27]" viewBox="0 0 100 30" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M0 15 Q 20 25, 40 8 T 70 20 T 100 5" strokeLinecap="round" />
+            </svg>
+          </div>
 
-            <div className="group rounded-2xl border border-white/10 bg-slate-900/50 p-4 transition-all duration-300 hover:border-blue-500/40 hover:bg-slate-900/70 backdrop-blur-md shadow-lg">
-              <div className="flex items-center justify-between text-xs text-slate-400">
-                <span className="font-medium">Active Lines</span>
-                <Zap className="h-4 w-4 text-amber-400" />
-              </div>
-              <div className="mt-2 flex items-baseline justify-between">
-                <span className="text-2xl font-bold text-white">12 / 12</span>
-                <span className="text-xs font-semibold text-emerald-400">100% Active</span>
-              </div>
-            </div>
-
-            <div className="col-span-2 sm:col-span-1 group rounded-2xl border border-white/10 bg-slate-900/50 p-4 transition-all duration-300 hover:border-blue-500/40 hover:bg-slate-900/70 backdrop-blur-md shadow-lg">
-              <div className="flex items-center justify-between text-xs text-slate-400">
-                <span className="font-medium">Quality Rate</span>
-                <ShieldCheck className="h-4 w-4 text-blue-400" />
-              </div>
-              <div className="mt-2 flex items-baseline justify-between">
-                <span className="text-2xl font-bold text-white">99.9%</span>
-                <span className="text-xs font-semibold text-blue-400">Optimal</span>
-              </div>
+          {/* Filter Dropdown */}
+          <div className="min-w-[140px]">
+            <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-300 mb-1">
+              Production Line
+            </label>
+            <div className="relative">
+              <select
+                value={selectedBrand}
+                onChange={(e) => setSelectedBrand(e.target.value)}
+                className="w-full appearance-none rounded-xl border border-red-950/80 bg-[#0c0305] px-3.5 py-1.5 text-xs font-semibold text-white focus:border-red-600 focus:outline-none cursor-pointer"
+              >
+                <option value="All">All Lines</option>
+                <option value="Line-Alpha">Bottling Line A</option>
+                <option value="Line-Beta">Canning Line B</option>
+                <option value="Line-Gamma">Packaging Line C</option>
+                <option value="Line-Delta">Blending Line D</option>
+              </select>
+              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-gray-400" />
             </div>
           </div>
 
         </div>
-      </div>
 
-      {/* Bottom Accent Bar */}
-      <div className="h-1 w-full bg-gradient-to-r from-blue-600 via-indigo-500 to-red-600" />
+      </div>
     </div>
   );
 }
+

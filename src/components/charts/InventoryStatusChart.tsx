@@ -5,9 +5,9 @@ type Props = {
   data: Array<{ name: string; value: number; color: string }>;
 };
 
-// Map colors to emphasize Coca-Cola red for main inventory item
+// Map colors to emphasize WEFIXO red for main inventory item
 const customColors: Record<string, string> = {
-  "Raw Materials": "#f40009", // Coca-Cola Red
+  "Raw Materials": "#ff1e27", // WEFIXO Red
   Packaging: "#06b6d4",
   Syrup: "#10b981",
   "Finished Goods": "#3b82f6",
