@@ -7,18 +7,19 @@ type Props = {
 
 export default function PageHeader({ eyebrow, title, description, badge }: Props) {
   return (
-    <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+    <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between font-sans">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.35em] text-red-400">{eyebrow}</p>
-        <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">{title}</h1>
-        <p className="mt-2 text-sm text-slate-400 sm:text-base">{description}</p>
+        <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#ff1e27]">{eyebrow}</p>
+        <h1 className="mt-1 text-3xl font-black tracking-tight text-white sm:text-4xl">{title}</h1>
+        <p className="mt-1 text-sm font-medium text-gray-400">{description}</p>
       </div>
 
       {badge ? (
-        <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+        <div className="rounded-xl border border-red-900/60 bg-[#0c0305] px-4 py-2 text-xs font-bold text-[#ff1e27] shadow-[0_0_12px_rgba(255,30,39,0.15)]">
           {badge}
         </div>
       ) : null}
     </div>
   );
 }
+
