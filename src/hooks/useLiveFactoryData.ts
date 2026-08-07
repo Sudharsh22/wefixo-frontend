@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 type LiveKpi = {
   title: string;
   value: string;

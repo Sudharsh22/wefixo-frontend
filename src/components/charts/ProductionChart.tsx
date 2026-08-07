@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import {
+  Area,
+  AreaChart,
   CartesianGrid,
-  Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -15,56 +15,73 @@ type Props = {
 
 export default function ProductionChart({ data }: Props) {
   const chartData = useMemo(() => data, [data]);
+
   return (
-    <section className="mt-8 rounded-3xl border border-white/10 bg-slate-900/70 p-4 shadow-[0_25px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur sm:p-6">
-      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <section className="mt-8 rounded-3xl border border-red-500/20 bg-gradient-to-br from-slate-950/80 via-slate-900/70 to-slate-950/80 p-4 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:border-red-500/30 sm:p-6">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-white/10 pb-4">
         <div>
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
-            Performance trend
-          </p>
-          <h2 className="mt-2 text-xl font-semibold text-white">
-            Weekly Production Trend
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">Live Volume Throughput</span>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500"></span>
+            </span>
+          </div>
+          <h2 className="mt-1 text-xl font-bold tracking-tight text-white sm:text-2xl">
+            Weekly Production Volume Trend
           </h2>
         </div>
-        <div className="rounded-full border border-red-500/20 bg-red-500/10 px-3 py-1 text-sm text-red-300">
-          +8.1% this week
+        <div className="flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3.5 py-1.5 text-xs font-semibold text-red-400 backdrop-blur-md shadow-[0_0_15px_rgba(244,0,9,0.2)]">
+          <span>+8.1% vs Target</span>
         </div>
       </div>
 
-      <div className="h-[260px] w-full sm:h-[320px]">
+      <div className="h-[280px] w-full sm:h-[340px]">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chartData}>
-            <CartesianGrid stroke="#334155" strokeDasharray="3 3" vertical={false} />
+          <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+            <defs>
+              <linearGradient id="cokeRedGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#f40009" stopOpacity={0.45} />
+                <stop offset="95%" stopColor="#f40009" stopOpacity={0.0} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" vertical={false} />
             <XAxis
               dataKey="day"
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#94a3b8", fontSize: 12 }}
+              tick={{ fill: "#94a3b8", fontSize: 12, fontWeight: 600 }}
             />
             <YAxis
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#94a3b8", fontSize: 12 }}
+              tick={{ fill: "#94a3b8", fontSize: 12, fontWeight: 600 }}
               tickFormatter={(value) => `${value / 1000}k`}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "#020617",
-                border: "1px solid rgba(248, 113, 113, 0.2)",
-                borderRadius: "12px",
-                color: "#f8fafc",
+                backgroundColor: "rgba(15, 23, 42, 0.95)",
+                borderColor: "rgba(244, 0, 9, 0.4)",
+                borderRadius: "16px",
+                color: "#ffffff",
+                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+                backdropFilter: "blur(12px)",
+                padding: "12px 16px",
               }}
-              formatter={(value) => [`${Number(value).toLocaleString()} cases`, "Production"]}
+              formatter={(value) => [`${Number(value).toLocaleString()} Cases Packed`, "Production Volume"]}
+              labelStyle={{ fontWeight: "bold", color: "#f87171", marginBottom: "4px" }}
             />
-            <Line
+            <Area
               type="monotone"
               dataKey="production"
-              stroke="#f43f5e"
-              strokeWidth={3}
-              dot={{ r: 4, fill: "#fb7185" }}
-              activeDot={{ r: 6, fill: "#fda4af" }}
+              stroke="#f40009"
+              strokeWidth={3.5}
+              fillOpacity={1}
+              fill="url(#cokeRedGradient)"
+              dot={{ r: 5, fill: "#f40009", stroke: "#ffffff", strokeWidth: 2 }}
+              activeDot={{ r: 8, fill: "#f40009", stroke: "#ffffff", strokeWidth: 3, className: "coke-glow" }}
             />
-          </LineChart>
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     </section>

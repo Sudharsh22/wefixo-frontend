@@ -8,13 +8,17 @@ type Props = {
 
 export default function SectionCard({ eyebrow, title, badge, children, className }: Props) {
   return (
-    <section className={`rounded-3xl border border-white/10 bg-slate-900/70 p-6 shadow-[0_25px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur ${className ?? ""}`.trim()}>
-      <div className="mb-5 flex items-center justify-between gap-3">
+    <section className={`rounded-3xl border border-white/10 bg-gradient-to-br from-slate-950/80 via-slate-900/70 to-slate-950/80 p-6 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:border-red-500/30 ${className ?? ""}`.trim()}>
+      <div className="mb-5 flex items-center justify-between gap-3 border-b border-white/10 pb-4">
         <div>
-          {eyebrow ? <p className="text-sm uppercase tracking-[0.3em] text-slate-400">{eyebrow}</p> : null}
-          <h2 className="mt-2 text-xl font-semibold text-white">{title}</h2>
+          {eyebrow ? <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">{eyebrow}</p> : null}
+          <h2 className="mt-1 text-xl font-bold text-white">{title}</h2>
         </div>
-        {badge ? <div className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-sm text-cyan-300">{badge}</div> : null}
+        {badge ? (
+          <div className="rounded-full border border-red-500/30 bg-red-500/10 px-3.5 py-1.5 text-xs font-semibold text-red-400 backdrop-blur-md shadow-[0_0_12px_rgba(244,0,9,0.15)]">
+            {badge}
+          </div>
+        ) : null}
       </div>
 
       {children}
