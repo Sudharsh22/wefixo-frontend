@@ -1,21 +1,21 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
 const data = [
-  { name: "Texas", value: 144, percent: "18.1%", color: "#e60012" },
-  { name: "South Dakota", value: 72, percent: "9.0%", color: "#b3000e" },
-  { name: "Tennessee", value: 72, percent: "9.0%", color: "#80000a" },
-  { name: "Utah", value: 72, percent: "9.0%", color: "#ff4d58" },
-  { name: "Vermont", value: 72, percent: "9.0%", color: "#ff1e27" },
-  { name: "Virginia", value: 72, percent: "9.0%", color: "#990000" },
-  { name: "Washington", value: 72, percent: "9.0%", color: "#660000" },
-  { name: "West Virginia", value: 72, percent: "9.0%", color: "#ff8088" },
+  { name: "Tamil Nadu", value: 144, percent: "18.1%", color: "#e60012" },
+  { name: "Karnataka", value: 116, percent: "14.5%", color: "#b3000e" },
+  { name: "Maharashtra", value: 105, percent: "13.2%", color: "#80000a" },
+  { name: "Gujarat", value: 96, percent: "12.0%", color: "#ff4d58" },
+  { name: "Telangana", value: 91, percent: "11.4%", color: "#ff1e27" },
+  { name: "Andhra Pradesh", value: 86, percent: "10.8%", color: "#990000" },
+  { name: "Kerala", value: 80, percent: "10.0%", color: "#660000" },
+  { name: "Uttar Pradesh", value: 80, percent: "10.0%", color: "#ff8088" },
 ];
 
 export default function RetailerDonutChart() {
   return (
     <div className="flex flex-col justify-between rounded-xl border border-red-950/90 bg-[#060204] p-4 font-sans shadow-xl">
       <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-gray-300">
-        Count of Retailer by State
+        Factory Distribution by State
       </h3>
 
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -39,6 +39,7 @@ export default function RetailerDonutChart() {
               <Tooltip
                 contentStyle={{ backgroundColor: "#0e0204", borderColor: "#ff1e27", borderRadius: "8px" }}
                 itemStyle={{ color: "#fff" }}
+                formatter={(value: any) => [`${value} Units`, "Capacity"]}
               />
             </PieChart>
           </ResponsiveContainer>

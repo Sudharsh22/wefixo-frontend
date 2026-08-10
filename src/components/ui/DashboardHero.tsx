@@ -23,11 +23,11 @@ export default function DashboardHero() {
         {/* Right Side: Metrics & Filter Bar */}
         <div className="flex flex-wrap items-center gap-4 sm:gap-6 lg:justify-end">
           
-          {/* Metric 1: Sum of Units Sold */}
+          {/* Metric 1: Total Units Produced */}
           <div className="flex items-center gap-4 rounded-xl border border-red-950/80 bg-[#0c0305] px-4 py-2.5 shadow-inner">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-wider text-gray-300">
-                Sum of Units Produced
+                Total Units Produced
               </p>
               <p className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
                 2,588,500
@@ -39,11 +39,11 @@ export default function DashboardHero() {
             </svg>
           </div>
 
-          {/* Metric 2: Sum of Total Sales */}
+          {/* Metric 2: Total Factory Yield */}
           <div className="flex items-center gap-4 rounded-xl border border-red-950/80 bg-[#0c0305] px-4 py-2.5 shadow-inner">
             <div>
               <p className="text-[10px] font-bold uppercase tracking-wider text-gray-300">
-                Sum of Total Yield Value
+                Total Factory Yield
               </p>
               <p className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
                 1.16M
@@ -56,9 +56,9 @@ export default function DashboardHero() {
           </div>
 
           {/* Filter Dropdown */}
-          <div className="min-w-[140px]">
+          <div className="min-w-[150px]">
             <label className="block text-[10px] font-bold uppercase tracking-wider text-gray-300 mb-1">
-              Production Line
+              Production Unit
             </label>
             <div className="relative">
               <select
@@ -66,11 +66,11 @@ export default function DashboardHero() {
                 onChange={(e) => setSelectedBrand(e.target.value)}
                 className="w-full appearance-none rounded-xl border border-red-950/80 bg-[#0c0305] px-3.5 py-1.5 text-xs font-semibold text-white focus:border-red-600 focus:outline-none cursor-pointer"
               >
-                <option value="All">All Lines</option>
-                <option value="Line-Alpha">Bottling Line A</option>
-                <option value="Line-Beta">Canning Line B</option>
-                <option value="Line-Gamma">Packaging Line C</option>
-                <option value="Line-Delta">Blending Line D</option>
+                <option value="All">All Plants</option>
+                <option value="Line-Alpha">Plant Chennai (TN)</option>
+                <option value="Line-Beta">Plant Bengaluru (KA)</option>
+                <option value="Line-Gamma">Plant Pune (MH)</option>
+                <option value="Line-Delta">Plant Ahmedabad (GJ)</option>
               </select>
               <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-gray-400" />
             </div>
@@ -82,4 +82,3 @@ export default function DashboardHero() {
     </div>
   );
 }
-

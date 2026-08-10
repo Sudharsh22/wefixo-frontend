@@ -15,13 +15,16 @@ const brandData = [
 ];
 
 const initialCities: CityItem[] = [
-  { name: "Portland", checked: true },
-  { name: "Providence", checked: true },
-  { name: "Richmond", checked: true },
-  { name: "Salt Lake City", checked: true },
-  { name: "San Francisco", checked: true },
-  { name: "Seattle", checked: true },
-  { name: "Sioux Falls", checked: true },
+  { name: "Chennai", checked: true },
+  { name: "Bengaluru", checked: true },
+  { name: "Hyderabad", checked: true },
+  { name: "Mumbai", checked: true },
+  { name: "Pune", checked: true },
+  { name: "Ahmedabad", checked: true },
+  { name: "Coimbatore", checked: true },
+  { name: "Kochi", checked: true },
+  { name: "Delhi", checked: true },
+  { name: "Kolkata", checked: true },
 ];
 
 export default function FunnelChart() {
@@ -43,19 +46,19 @@ export default function FunnelChart() {
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 rounded-xl border border-red-950/90 bg-[#060204] p-4 font-sans shadow-xl">
-      {/* Brand Horizontal Funnel Bars (Left 3 columns) */}
+      {/* Production Line Horizontal Bars (Left 3 columns) */}
       <div className="lg:col-span-3 flex flex-col justify-between">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-xs font-bold uppercase tracking-wider text-gray-300">
             Sum of Total Output by Production Line
           </h3>
-          <span className="text-[10px] text-gray-400">100%</span>
+          <span className="text-[10px] text-gray-400">100% Target</span>
         </div>
 
         <div className="space-y-2.5 my-auto">
           {brandData.map((item) => (
             <div key={item.name} className="flex items-center gap-3">
-              <span className="w-24 text-right text-xs font-semibold text-gray-300 truncate">
+              <span className="w-28 text-right text-xs font-semibold text-gray-300 truncate">
                 {item.name}
               </span>
               <div className="relative flex-1 bg-[#120305] h-6 rounded overflow-hidden border border-red-950/60">
@@ -71,14 +74,14 @@ export default function FunnelChart() {
         </div>
 
         <div className="flex items-center justify-end text-[10px] font-bold text-gray-400 mt-2">
-          <span>50.4%</span>
+          <span>50.4% Min Capacity</span>
         </div>
       </div>
 
       {/* City Multi-Select Filter Checklist (Right 1 column) */}
       <div className="border-t lg:border-t-0 lg:border-l border-red-950/80 pt-4 lg:pt-0 lg:pl-4 flex flex-col">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-gray-300">City</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-gray-300">Plant Location</span>
           <span className="text-[10px] text-gray-400">▼</span>
         </div>
 

@@ -3,6 +3,7 @@ import StateSalesBarChart from "../components/charts/StateSalesBarChart";
 import FunnelChart from "../components/charts/FunnelChart";
 import RetailerDonutChart from "../components/charts/RetailerDonutChart";
 import RegionAreaChart from "../components/charts/RegionAreaChart";
+import MonthlyProductionChart from "../components/charts/MonthlyProductionChart";
 import LiveFactoryStatusPanel from "../components/dashboard/LiveFactoryStatusPanel";
 import Sidebar from "../components/sidebar/Sidebar";
 import DashboardHero from "../components/ui/DashboardHero";
@@ -44,18 +45,18 @@ export default function Dashboard() {
         {/* Main Dashboard Chart Grid */}
         <div className="space-y-4">
           
-          {/* Grid Row 1: Gauge, State Bar, Funnel + City Filter */}
+          {/* Grid Row 1: Gauge, State Production Output Bar, Production Line Funnel */}
           <div className="grid gap-4 grid-cols-1 lg:grid-cols-4">
             <GaugeChart />
-            <StateSalesBarChart title="Sum of Total Sales by State" />
+            <StateSalesBarChart title="Production Output by State" />
             <div className="lg:col-span-2">
               <FunnelChart />
             </div>
           </div>
 
-          {/* Grid Row 2: Units Sold by State, Retailer Donut, Regional Area Chart */}
+          {/* Grid Row 2: Monthly Production Trend, Factory Distribution Donut, Region Capacity Area */}
           <div className="grid gap-4 grid-cols-1 lg:grid-cols-3">
-            <StateSalesBarChart title="Sum of Units Sold by State" />
+            <MonthlyProductionChart />
             <RetailerDonutChart />
             <RegionAreaChart />
           </div>

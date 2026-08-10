@@ -1,18 +1,18 @@
 import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 
 const data = [
-  { region: "Midwest", count: 1000 },
-  { region: "Northeast", count: 850 },
-  { region: "South", count: 700 },
-  { region: "West", count: 520 },
-  { region: "Southeast", count: 320 },
+  { region: "South India", count: 1000 },
+  { region: "West India", count: 850 },
+  { region: "North India", count: 700 },
+  { region: "East India", count: 520 },
+  { region: "Central India", count: 320 },
 ];
 
 export default function RegionAreaChart() {
   return (
     <div className="flex flex-col justify-between rounded-xl border border-red-950/90 bg-[#060204] p-4 font-sans shadow-xl">
       <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-gray-300">
-        Count of Retailer and Count of Beverage Brand by Region
+        Production Capacity by Region
       </h3>
 
       <div className="h-56 w-full">
@@ -34,6 +34,7 @@ export default function RegionAreaChart() {
             <Tooltip
               contentStyle={{ backgroundColor: "#0e0204", borderColor: "#ff1e27", borderRadius: "8px" }}
               labelStyle={{ color: "#fff", fontWeight: "bold" }}
+              formatter={(value: any) => [`${value} Kilo-Cases`, "Capacity"]}
             />
             <Area type="monotone" dataKey="count" stroke="#ff1e27" strokeWidth={3} fillOpacity={1} fill="url(#areaRedGradient)" />
           </AreaChart>
@@ -41,7 +42,7 @@ export default function RegionAreaChart() {
       </div>
 
       <div className="text-center text-[10px] uppercase font-bold text-gray-400 mt-1">
-        Region
+        Indian Region
       </div>
     </div>
   );
