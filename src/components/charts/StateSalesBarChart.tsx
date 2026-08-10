@@ -1,23 +1,23 @@
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 
 const data = [
-  { state: "Texas", sales: 0.42 },
-  { state: "Washington", sales: 0.38 },
-  { state: "Utah", sales: 0.26 },
-  { state: "Virginia", sales: 0.25 },
-  { state: "Tennessee", sales: 0.24 },
-  { state: "Oregon", sales: 0.22 },
-  { state: "Arizona", sales: 0.21 },
-  { state: "Colorado", sales: 0.16 },
-  { state: "North Carolina", sales: 0.12 },
-  { state: "New York", sales: 0.11 },
+  { state: "Tamil Nadu", output: 0.42 },
+  { state: "Karnataka", output: 0.38 },
+  { state: "Maharashtra", output: 0.35 },
+  { state: "Gujarat", output: 0.31 },
+  { state: "Telangana", output: 0.28 },
+  { state: "Andhra Pr.", output: 0.25 },
+  { state: "Kerala", output: 0.22 },
+  { state: "Uttar Pr.", output: 0.19 },
+  { state: "Delhi", output: 0.15 },
+  { state: "West Bengal", output: 0.12 },
 ];
 
 type Props = {
   title?: string;
 };
 
-export default function StateSalesBarChart({ title = "Sum of Total Sales by State" }: Props) {
+export default function StateSalesBarChart({ title = "Production Output by State" }: Props) {
   return (
     <div className="flex flex-col justify-between rounded-xl border border-red-950/90 bg-[#060204] p-4 font-sans shadow-xl">
       <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-gray-300">
@@ -45,15 +45,15 @@ export default function StateSalesBarChart({ title = "Sum of Total Sales by Stat
             <Tooltip
               contentStyle={{ backgroundColor: "#0e0204", borderColor: "#ff1e27", borderRadius: "8px" }}
               labelStyle={{ color: "#fff", fontWeight: "bold" }}
-              formatter={(value: any) => [`$${value}M`, "Sales"]}
+              formatter={(value: any) => [`${value}M Cases`, "Output"]}
             />
-            <Bar dataKey="sales" fill="#e60012" radius={[2, 2, 0, 0]} />
+            <Bar dataKey="output" fill="#e60012" radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       <div className="text-center text-[10px] uppercase font-bold text-gray-400 mt-1">
-        State
+        Indian State
       </div>
     </div>
   );
