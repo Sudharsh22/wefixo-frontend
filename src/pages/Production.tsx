@@ -110,10 +110,10 @@ const statusStyles = {
 
 export default function Production() {
   return (
-    <div className="flex min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.22),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white">
+    <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.22),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white font-sans">
       <Sidebar />
 
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 sm:p-6 lg:p-8 space-y-6">
         <PageHeader
           eyebrow="Production intelligence"
           title="Production Operations"
@@ -127,8 +127,7 @@ export default function Production() {
           ))}
         </div>
 
-        <SectionCard eyebrow="Throughput" title="Hourly Production Output" badge="Peak window 14:00–18:00" className="mt-8">
-
+        <SectionCard eyebrow="Throughput" title="Hourly Production Output" badge="Peak window 14:00–18:00">
           <div className="h-[320px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={hourlyData}>
@@ -167,7 +166,7 @@ export default function Production() {
           </div>
         </SectionCard>
 
-        <SectionCard eyebrow="Order tracking" title="Production Schedule" badge="4 live jobs" className="mt-8">
+        <SectionCard eyebrow="Order tracking" title="Production Schedule" badge="4 live jobs">
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm text-slate-300">
               <thead>

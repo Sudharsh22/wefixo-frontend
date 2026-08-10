@@ -108,10 +108,10 @@ export default function MachineAlertsPage() {
   }, [selectedSeverity]);
 
   return (
-    <div className="flex min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.2),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white">
+    <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.2),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white font-sans">
       <Sidebar />
 
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 sm:p-6 lg:p-8 space-y-6">
         <PageHeader
           eyebrow="Asset monitoring"
           title="Machine Alerts"
@@ -119,7 +119,7 @@ export default function MachineAlertsPage() {
           badge="Real-time style data"
         />
 
-        <SectionCard eyebrow="Filter" title="Alert severity" className="mb-6">
+        <SectionCard eyebrow="Filter" title="Alert severity">
           <div className="flex flex-wrap gap-3">
             {(["All", "Low", "Medium", "High", "Critical"] as const).map((option) => (
               <button
@@ -179,7 +179,7 @@ export default function MachineAlertsPage() {
           )}
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-3">
           <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-4">
             <div className="flex items-center gap-3">
               <Factory className="h-5 w-5 text-red-400" />

@@ -38,8 +38,8 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="flex h-auto w-full flex-col border-b border-red-950/80 bg-[#020102] p-4 font-sans md:h-screen md:w-64 md:border-b-0 md:border-r md:p-5 lg:w-64 flex-shrink-0">
-      <div>
+    <aside className="flex h-auto w-full flex-col border-b border-red-950/80 bg-[#020102] p-4 font-sans md:h-screen md:w-64 md:border-b-0 md:border-r md:p-5 lg:w-64 flex-shrink-0 md:sticky md:top-0 md:left-0 z-30">
+      <div className="flex-shrink-0">
         {/* Brand Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between">
@@ -54,7 +54,7 @@ export default function Sidebar() {
 
         {/* User Card */}
         {user ? (
-          <div className="mb-6 flex items-center justify-between rounded-xl border border-red-950/90 bg-[#0a0204] p-3 shadow-inner">
+          <div className="mb-4 flex items-center justify-between rounded-xl border border-red-950/90 bg-[#0a0204] p-3 shadow-inner">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600/20 text-[#ff1e27] border border-red-600/40">
                 <User className="h-5 w-5" />
@@ -67,7 +67,7 @@ export default function Sidebar() {
             <ChevronDown className="h-4 w-4 text-gray-400" />
           </div>
         ) : (
-          <div className="mb-6 flex items-center justify-between rounded-xl border border-red-950/90 bg-[#0a0204] p-3">
+          <div className="mb-4 flex items-center justify-between rounded-xl border border-red-950/90 bg-[#0a0204] p-3">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600/20 text-[#ff1e27] border border-red-600/40">
                 <User className="h-5 w-5" />
@@ -83,7 +83,7 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation Links */}
-      <nav className="space-y-1.5 overflow-y-auto">
+      <nav className="flex-1 space-y-1.5 overflow-y-auto py-2 pr-1">
         {visibleLinks.map((link) => {
           const Icon = link.icon;
           return (
@@ -112,11 +112,11 @@ export default function Sidebar() {
       {/* Logout Button */}
       <button
         onClick={handleLogout}
-        className="mt-auto flex w-full items-center justify-center gap-2 rounded-xl border border-red-950/90 bg-[#0a0204] px-4 py-2.5 text-xs font-semibold text-gray-300 transition-all hover:border-red-600/50 hover:bg-[#180306] hover:text-red-400"
+        className="mt-auto flex w-full items-center justify-center gap-2 rounded-xl border border-red-950/90 bg-[#0a0204] px-4 py-2.5 text-xs font-semibold text-gray-300 transition-all hover:border-red-600/50 hover:bg-[#180306] hover:text-red-400 flex-shrink-0"
       >
         <LogOut className="h-4 w-4 text-red-500" />
         <span>Logout</span>
       </button>
     </aside>
   );
-}
+}

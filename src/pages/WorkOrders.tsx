@@ -144,10 +144,10 @@ export default function WorkOrdersPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.2),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white">
+    <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.2),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white font-sans">
       <Sidebar />
 
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 sm:p-6 lg:p-8 space-y-6">
         <PageHeader
           eyebrow="Operations"
           title="Work Orders"
@@ -155,7 +155,7 @@ export default function WorkOrdersPage() {
           badge="Local state enabled"
         />
 
-        <div className="mb-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-4">
             <p className="text-sm text-slate-400">Total</p>
             <p className="mt-2 text-2xl font-semibold">{summary.total}</p>

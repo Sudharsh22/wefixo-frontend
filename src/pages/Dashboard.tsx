@@ -34,17 +34,17 @@ export default function Dashboard() {
   const { kpis } = useLiveFactoryData();
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#000000] text-white md:flex-row font-sans">
+    <div className="flex h-screen w-full overflow-hidden flex-col bg-[#000000] text-white md:flex-row font-sans">
       <Sidebar />
 
-      <main className="flex-1 p-3 sm:p-5 lg:p-6 overflow-x-hidden bg-[#000000]">
-        {/* Top Header & Brand Bar (Image 2 Top Header) */}
+      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-3 sm:p-5 lg:p-6 bg-[#000000]">
+        {/* Top Header & Brand Bar */}
         <DashboardHero />
 
-        {/* Image 2 Main Dashboard Chart Grid */}
+        {/* Main Dashboard Chart Grid */}
         <div className="space-y-4">
           
-          {/* Grid Row 1: Gauge (16M), State Bar, Funnel + City Filter */}
+          {/* Grid Row 1: Gauge, State Bar, Funnel + City Filter */}
           <div className="grid gap-4 grid-cols-1 lg:grid-cols-4">
             <GaugeChart />
             <StateSalesBarChart title="Sum of Total Sales by State" />
@@ -62,7 +62,7 @@ export default function Dashboard() {
 
         </div>
 
-        {/* Live Operational Telemetry Panel (Image 2 Bottom Section) */}
+        {/* Live Operational Telemetry Panel */}
         <LiveFactoryStatusPanel />
 
         {/* Smart Factory Operational KPI Overview */}

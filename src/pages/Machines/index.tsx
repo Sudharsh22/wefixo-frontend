@@ -12,7 +12,7 @@ type KPI = {
   value: string;
   subtitle: string;
   icon: LucideIcon;
-  tone: "red" | "emerald" | "amber" | "cyan";
+  tone?: "red" | "emerald" | "amber" | "cyan";
 };
 
 const kpiData: KPI[] = [
@@ -21,14 +21,14 @@ const kpiData: KPI[] = [
     value: "24",
     subtitle: "across 4 production lines",
     icon: Cpu,
-    tone: "cyan",
+    tone: "red",
   },
   {
     title: "Running",
     value: "19",
     subtitle: "online and producing",
     icon: Zap,
-    tone: "emerald",
+    tone: "red",
   },
   {
     title: "Idle",
@@ -50,10 +50,10 @@ export default function MachinesPage() {
   const { machineUtilizationData, machineStatuses } = useLiveFactoryData();
 
   return (
-    <div className="flex min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.22),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white">
+    <div className="flex h-screen w-full overflow-hidden bg-gradient-to-br from-[#050505] via-[#0f0f0f] to-[#2b0000] text-white font-sans">
       <Sidebar />
 
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+      <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
         <PageHeader
           eyebrow="Asset monitoring"
           title="Machine Monitoring"
@@ -67,7 +67,7 @@ export default function MachinesPage() {
           ))}
         </div>
 
-        <div className="mt-8 grid gap-6 xl:grid-cols-2">
+        <div className="grid gap-6 xl:grid-cols-2">
           <MachineUtilizationChart data={machineUtilizationData} />
           <MachineStatusTable machines={machineStatuses} />
         </div>

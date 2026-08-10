@@ -82,10 +82,10 @@ const alertStyles = {
 
 export default function AIInsightsPage() {
   return (
-    <div className="flex min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.22),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white">
+    <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.22),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white font-sans">
       <Sidebar />
 
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 sm:p-6 lg:p-8 space-y-6">
         <PageHeader
           eyebrow="AI operations"
           title="AI Insights"
@@ -99,9 +99,8 @@ export default function AIInsightsPage() {
           ))}
         </div>
 
-        <div className="mt-8 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+        <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
           <SectionCard eyebrow="Demand forecast" title="Demand Forecast" badge="Strong upcoming demand">
-
             <div className="h-[320px] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={forecastData}>
@@ -124,7 +123,6 @@ export default function AIInsightsPage() {
           </SectionCard>
 
           <SectionCard eyebrow="Prediction insights" title="Predicted Machine Failures" badge="2 at risk">
-
             <div className="space-y-3">
               <div className="rounded-2xl border border-white/10 bg-slate-800/60 p-4">
                 <div className="flex items-center justify-between">
@@ -144,9 +142,8 @@ export default function AIInsightsPage() {
           </SectionCard>
         </div>
 
-        <div className="mt-8 grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
           <SectionCard eyebrow="Risk watch" title="Inventory Risk Alerts" badge="3 flagged items">
-
             <div className="space-y-3">
               {alerts.map((alert) => (
                 <div key={alert.item} className="flex items-center justify-between rounded-2xl border border-white/10 bg-slate-800/60 p-4">
@@ -163,7 +160,6 @@ export default function AIInsightsPage() {
           </SectionCard>
 
           <SectionCard eyebrow="Next steps" title="Suggested Actions" badge="AI-driven plan">
-
             <div className="space-y-3">
               {recommendations.map((item) => (
                 <div key={item} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-slate-800/60 p-4">

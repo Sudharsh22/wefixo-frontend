@@ -84,10 +84,10 @@ const statusStyles = {
 
 export default function ReportsPage() {
   return (
-    <div className="flex min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.22),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white">
+    <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.22),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white font-sans">
       <Sidebar />
 
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 sm:p-6 lg:p-8 space-y-6">
         <PageHeader
           eyebrow="Enterprise reporting"
           title="Reports"
@@ -101,9 +101,8 @@ export default function ReportsPage() {
           ))}
         </div>
 
-        <div className="mt-8 grid gap-6 xl:grid-cols-3">
+        <div className="grid gap-6 xl:grid-cols-3">
           <SectionCard eyebrow="Operations" title="Production Report" badge="Updated today">
-
             <p className="text-sm text-slate-400">
               Bottling throughput, line efficiency, and production volume snapshot for the current shift.
             </p>
@@ -119,7 +118,6 @@ export default function ReportsPage() {
           </SectionCard>
 
           <SectionCard eyebrow="Supply chain" title="Inventory Report" badge="Needs review">
-
             <p className="text-sm text-slate-400">
               Stock availability, reserved inventory, and reorder risk across critical materials.
             </p>
@@ -135,7 +133,6 @@ export default function ReportsPage() {
           </SectionCard>
 
           <SectionCard eyebrow="Reliability" title="Maintenance Report" badge="4 flagged items">
-
             <p className="text-sm text-slate-400">
               Maintenance workload, downtime trends, and unresolved service issues for the week.
             </p>
@@ -151,8 +148,7 @@ export default function ReportsPage() {
           </SectionCard>
         </div>
 
-        <SectionCard eyebrow="Archive" title="Report History" badge="Latest exports available" className="mt-8">
-
+        <SectionCard eyebrow="Archive" title="Report History" badge="Latest exports available">
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm text-slate-300">
               <thead>

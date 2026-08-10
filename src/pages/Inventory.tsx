@@ -22,7 +22,7 @@ type KPI = {
   value: string;
   subtitle: string;
   icon: LucideIcon;
-  tone: "red" | "emerald" | "amber" | "cyan";
+  tone?: "red" | "emerald" | "amber" | "cyan";
 };
 
 type StockRow = {
@@ -39,7 +39,7 @@ const kpiData: KPI[] = [
     value: "84,320",
     subtitle: "units across warehouse",
     icon: Boxes,
-    tone: "cyan",
+    tone: "red",
   },
   {
     title: "Available Stock",
@@ -64,11 +64,12 @@ const kpiData: KPI[] = [
   },
 ];
 
+// Red color palette variations for Smart Factory theme
 const inventoryDistribution = [
-  { name: "Raw Materials", value: 45, color: "#f43f5e" },
-  { name: "Packaging", value: 25, color: "#fb923c" },
-  { name: "Syrup", value: 15, color: "#22c55e" },
-  { name: "Finished Goods", value: 15, color: "#38bdf8" },
+  { name: "Raw Materials", value: 45, color: "#ff1a1a" },
+  { name: "Packaging", value: 25, color: "#b30000" },
+  { name: "Syrup", value: 15, color: "#8b0000" },
+  { name: "Finished Goods", value: 15, color: "#ff4d4d" },
 ];
 
 const stockLevels = [
@@ -118,17 +119,17 @@ const stockRows: StockRow[] = [
 ];
 
 const statusStyles = {
-  Healthy: "border-emerald-500/20 bg-emerald-500/10 text-emerald-300",
-  Low: "border-amber-500/20 bg-amber-500/10 text-amber-300",
-  Critical: "border-red-500/20 bg-red-500/10 text-red-300",
+  Healthy: "border-emerald-500/40 bg-emerald-500/15 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.2)]",
+  Low: "border-amber-500/40 bg-amber-500/15 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.2)]",
+  Critical: "border-red-600/50 bg-red-950/60 text-red-300 shadow-[0_0_12px_rgba(255,26,26,0.25)]",
 };
 
 export default function InventoryPage() {
   return (
-    <div className="flex min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.22),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white">
+    <div className="flex h-screen w-full overflow-hidden bg-gradient-to-br from-[#050505] via-[#0f0f0f] to-[#2b0000] text-white font-sans">
       <Sidebar />
 
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+      <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
         <PageHeader
           eyebrow="Supply chain control"
           title="Inventory Management"
@@ -142,84 +143,109 @@ export default function InventoryPage() {
           ))}
         </div>
 
-        <div className="mt-8 grid gap-6 xl:grid-cols-2">
+        <div className="grid gap-6 xl:grid-cols-2">
           <SectionCard eyebrow="Stock mix" title="Inventory Distribution" badge="Balanced inventory">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="h-[260px] w-full md:w-1/2">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={inventoryDistribution}
+                      dataKey="value"
+                      nameKey="name"
+                      innerRadius={65}
+                      outerRadius={100}
+                      paddingAngle={4}
+                      stroke="none"
+                    >
+                      {inventoryDistribution.map((entry) => (
+                        <Cell key={entry.name} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "rgba(15, 15, 15, 0.95)",
+                        borderColor: "rgba(255, 26, 26, 0.4)",
+                        borderRadius: "16px",
+                        color: "#ffffff",
+                        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 26, 26, 0.25)",
+                        backdropFilter: "blur(12px)",
+                        padding: "12px 16px",
+                      }}
+                      formatter={(value) => [`${value}% Share`, "Category"]}
+                      labelStyle={{ fontWeight: "bold", color: "#ff4d4d" }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
 
-            <div className="h-[300px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={inventoryDistribution}
-                    dataKey="value"
-                    nameKey="name"
-                    innerRadius={70}
-                    outerRadius={110}
-                    paddingAngle={3}
+              {/* Legend List */}
+              <div className="w-full md:w-1/2 space-y-2.5">
+                {inventoryDistribution.map((item) => (
+                  <div
+                    key={item.name}
+                    className="flex items-center justify-between rounded-xl border border-red-900/30 bg-[#0f0f0f]/60 px-3.5 py-2.5 backdrop-blur-md transition-all duration-200 hover:border-red-600/40"
                   >
-                    {inventoryDistribution.map((entry) => (
-                      <Cell key={entry.name} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "#020617",
-                      border: "1px solid rgba(248, 113, 113, 0.2)",
-                      borderRadius: "12px",
-                      color: "#f8fafc",
-                    }}
-                    formatter={(value) => [`${value}%`, "Share"]}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
+                    <div className="flex items-center gap-2.5">
+                      <span className="h-3 w-3 rounded-full shadow-sm" style={{ backgroundColor: item.color }} />
+                      <span className="text-xs font-semibold text-white">{item.name}</span>
+                    </div>
+                    <span className="text-xs font-bold text-[#a3a3a3]">{item.value}%</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </SectionCard>
 
           <SectionCard eyebrow="Supply signal" title="Stock Levels" badge="2 items below target">
-
-            <div className="h-[300px] w-full">
+            <div className="h-[260px] w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={stockLevels}>
-                  <CartesianGrid stroke="#334155" strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="material" axisLine={false} tickLine={false} tick={{ fill: "#94a3b8", fontSize: 12 }} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fill: "#94a3b8", fontSize: 12 }} />
+                <BarChart data={stockLevels} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                  <CartesianGrid stroke="rgba(255, 26, 26, 0.12)" strokeDasharray="3 3" vertical={false} />
+                  <XAxis dataKey="material" axisLine={false} tickLine={false} tick={{ fill: "#a3a3a3", fontSize: 12, fontWeight: 600 }} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fill: "#a3a3a3", fontSize: 12, fontWeight: 600 }} />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: "#020617",
-                      border: "1px solid rgba(248, 113, 113, 0.2)",
-                      borderRadius: "12px",
-                      color: "#f8fafc",
+                      backgroundColor: "rgba(15, 15, 15, 0.95)",
+                      borderColor: "rgba(255, 26, 26, 0.4)",
+                      borderRadius: "16px",
+                      color: "#ffffff",
+                      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 26, 26, 0.25)",
+                      backdropFilter: "blur(12px)",
+                      padding: "12px 16px",
                     }}
+                    labelStyle={{ fontWeight: "bold", color: "#ff4d4d" }}
                   />
-                  <Bar dataKey="available" fill="#f43f5e" radius={[8, 8, 0, 0]} />
-                  <Bar dataKey="reorder" fill="#fb923c" radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="available" name="Available Stock" fill="#ff1a1a" radius={[8, 8, 0, 0]} maxBarSize={32} />
+                  <Bar dataKey="reorder" name="Reorder Level" fill="#8b0000" radius={[8, 8, 0, 0]} maxBarSize={32} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </SectionCard>
         </div>
 
-        <SectionCard eyebrow="Warehouse details" title="Inventory Levels" badge="Live material view" className="mt-8">
-
+        <SectionCard eyebrow="Warehouse details" title="Inventory Levels" badge="Live material view">
           <div className="overflow-x-auto">
-            <table className="min-w-full text-left text-sm text-slate-300">
+            <table className="min-w-full text-left text-sm text-[#a3a3a3]">
               <thead>
-                <tr className="border-b border-white/10 text-slate-400">
-                  <th className="px-3 py-3 font-medium">Material</th>
-                  <th className="px-3 py-3 font-medium">Available Qty</th>
-                  <th className="px-3 py-3 font-medium">Reserved Qty</th>
-                  <th className="px-3 py-3 font-medium">Reorder Level</th>
-                  <th className="px-3 py-3 font-medium">Status</th>
+                <tr className="border-b border-red-900/40 text-xs font-bold uppercase tracking-wider text-[#a3a3a3]">
+                  <th className="px-4 py-3.5">Material</th>
+                  <th className="px-4 py-3.5">Available Qty</th>
+                  <th className="px-4 py-3.5">Reserved Qty</th>
+                  <th className="px-4 py-3.5">Reorder Level</th>
+                  <th className="px-4 py-3.5">Status</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-red-950/40">
                 {stockRows.map((row) => (
-                  <tr key={row.material} className="border-b border-white/10 last:border-none">
-                    <td className="px-3 py-3 text-white">{row.material}</td>
-                    <td className="px-3 py-3">{row.availableQty.toLocaleString()}</td>
-                    <td className="px-3 py-3">{row.reservedQty.toLocaleString()}</td>
-                    <td className="px-3 py-3">{row.reorderLevel.toLocaleString()}</td>
-                    <td className="px-3 py-3">
-                      <span className={`inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${statusStyles[row.status]}`}>
+                  <tr key={row.material} className="transition-colors duration-200 hover:bg-[#ff1a1a]/10">
+                    <td className="px-4 py-4 font-semibold text-white">{row.material}</td>
+                    <td className="px-4 py-4 text-white font-mono">{row.availableQty.toLocaleString()}</td>
+                    <td className="px-4 py-4 text-[#a3a3a3] font-mono">{row.reservedQty.toLocaleString()}</td>
+                    <td className="px-4 py-4 text-[#a3a3a3] font-mono">{row.reorderLevel.toLocaleString()}</td>
+                    <td className="px-4 py-4">
+                      <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold ${statusStyles[row.status]}`}>
+                        <span className={`h-1.5 w-1.5 rounded-full ${row.status === "Healthy" ? "bg-emerald-400 animate-pulse" : row.status === "Low" ? "bg-amber-400" : "bg-red-400"}`} />
                         {row.status}
                       </span>
                     </td>

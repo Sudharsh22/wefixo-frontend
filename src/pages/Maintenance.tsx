@@ -116,10 +116,10 @@ const statusStyles = {
 
 export default function MaintenancePage() {
   return (
-    <div className="flex min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.22),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white">
+    <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.22),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white font-sans">
       <Sidebar />
 
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+      <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 sm:p-6 lg:p-8 space-y-6">
         <PageHeader
           eyebrow="Reliability center"
           title="Maintenance Management"
@@ -133,8 +133,7 @@ export default function MaintenancePage() {
           ))}
         </div>
 
-        <SectionCard eyebrow="Downtime analytics" title="Downtime Trend" badge="Weekly average 31 min" className="mt-8">
-
+        <SectionCard eyebrow="Downtime analytics" title="Downtime Trend" badge="Weekly average 31 min">
           <div className="h-[320px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={downtimeTrend}>
@@ -156,8 +155,7 @@ export default function MaintenancePage() {
           </div>
         </SectionCard>
 
-        <SectionCard eyebrow="Work order board" title="Maintenance Schedule" badge="4 active tasks" className="mt-8">
-
+        <SectionCard eyebrow="Work order board" title="Maintenance Schedule" badge="4 active tasks">
           <div className="overflow-x-auto">
             <table className="min-w-full text-left text-sm text-slate-300">
               <thead>
