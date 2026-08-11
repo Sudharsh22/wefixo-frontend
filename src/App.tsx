@@ -10,6 +10,7 @@ import ReportsPage from "./pages/Reports";
 import WorkOrdersPage from "./pages/WorkOrders";
 import MachineAlertsPage from "./pages/MachineAlerts";
 import LoginPage from "./pages/login";
+import DemandForecastPage from "./pages/DemandForecast";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/work-orders" element={<ProtectedRoute requiredPath="/work-orders"><WorkOrdersPage /></ProtectedRoute>} />
         <Route path="/machine-alerts" element={<ProtectedRoute requiredPath="/machine-alerts"><MachineAlertsPage /></ProtectedRoute>} />
         <Route path="/insights" element={<ProtectedRoute requiredPath="/insights"><AIInsightsPage /></ProtectedRoute>} />
+        <Route path="/demand-forecast" element={<ProtectedRoute requiredPath="/demand-forecast"><DemandForecastPage /></ProtectedRoute>} />
         <Route path="/reports" element={<ProtectedRoute requiredPath="/reports"><ReportsPage /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

@@ -11,8 +11,8 @@ export type AuthUser = {
 const AUTH_STORAGE_KEY = "wefixo-auth-user";
 
 export const rolePermissions: Record<UserRole, string[]> = {
-  admin: ["/dashboard", "/production", "/machines", "/inventory", "/maintenance", "/work-orders", "/machine-alerts", "/insights", "/reports"],
-  operations: ["/dashboard", "/production", "/inventory", "/work-orders", "/machine-alerts"],
+  admin: ["/dashboard", "/production", "/machines", "/inventory", "/maintenance", "/work-orders", "/machine-alerts", "/insights", "/demand-forecast", "/reports"],
+  operations: ["/dashboard", "/production", "/inventory", "/work-orders", "/machine-alerts", "/demand-forecast"],
   maintenance: ["/machines", "/maintenance", "/work-orders", "/machine-alerts"],
 };
 

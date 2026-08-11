@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { AlertTriangle, BellRing, Cpu, Factory, Thermometer } from "lucide-react";
+import { api, apiRoutes } from "../api/api";
 import Sidebar from "../components/sidebar/Sidebar";
 import EmptyState from "../components/ui/EmptyState";
 import PageHeader from "../components/ui/PageHeader";
@@ -98,14 +99,48 @@ const severityIconMap: Record<AlertSeverity, typeof AlertTriangle> = {
 
 export default function MachineAlertsPage() {
   const [selectedSeverity, setSelectedSeverity] = useState<AlertSeverity | "All">("All");
+  const [alerts, setAlerts] = useState<AlertItem[]>([]);
+  const [summary, setSummary] = useState({
+    active_lines: 7,
+    connected_devices: 184,
+    temperature_variance: "+1.8°C"
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchAlerts = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        // We added a new apiRoutes entry but we can just use the path directly if it's missing in apiRoutes
+        const response = await api.post('/workflows/predictive-maintenance');
+        const responseData = response.data?.data?._responseData || response.data?.data;
+        
+        if (response.data?.success && responseData) {
+          if (responseData.alerts) setAlerts(responseData.alerts);
+          if (responseData.summary) setSummary(responseData.summary);
+        } else {
+          throw new Error("Invalid response from workflow");
+        }
+      } catch (err: any) {
+        console.error("Error fetching machine alerts:", err);
+        setError(err.response?.data?.message || err.message || "An unexpected error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAlerts();
+  }, []);
 
   const filteredAlerts = useMemo(() => {
     if (selectedSeverity === "All") {
-      return alertsSeed;
+      return alerts;
     }
 
-    return alertsSeed.filter((alert) => alert.severity === selectedSeverity);
-  }, [selectedSeverity]);
+    return alerts.filter((alert) => alert.severity === selectedSeverity);
+  }, [selectedSeverity, alerts]);
 
   return (
     <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.2),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white font-sans">
@@ -134,16 +169,35 @@ export default function MachineAlertsPage() {
         </SectionCard>
 
         <div className="grid gap-4 xl:grid-cols-2">
-          {filteredAlerts.length === 0 ? (
+          {loading ? (
+            <div className="xl:col-span-2 flex flex-col items-center justify-center h-64 space-y-4">
+              <div className="w-12 h-12 border-4 border-red-500/20 border-t-[#ff1a1a] rounded-full animate-spin"></div>
+              <p className="text-[#a3a3a3]">Analyzing live telemetry data with AI for Predictive Maintenance...</p>
+            </div>
+          ) : error ? (
+            <div className="xl:col-span-2 rounded-xl border border-red-600/50 bg-red-950/30 p-6 flex items-start gap-4">
+              <AlertTriangle className="w-6 h-6 text-[#ff1a1a] flex-shrink-0" />
+              <div>
+                <h3 className="text-lg font-bold text-red-200">Workflow Error</h3>
+                <p className="mt-1 text-sm text-red-300/80">{error}</p>
+                <button 
+                  onClick={() => window.location.reload()}
+                  className="mt-4 px-4 py-2 bg-[#ff1a1a] hover:bg-red-700 text-white text-sm font-bold rounded-lg transition-colors"
+                >
+                  Retry
+                </button>
+              </div>
+            </div>
+          ) : filteredAlerts.length === 0 ? (
             <div className="xl:col-span-2">
               <EmptyState title="No alerts found" description="Try another severity filter to view more machine monitoring events." />
             </div>
           ) : (
-            filteredAlerts.map((alert) => {
-              const Icon = severityIconMap[alert.severity];
+            filteredAlerts.map((alert, index) => {
+              const Icon = severityIconMap[alert.severity] || AlertTriangle;
 
               return (
-                <div key={alert.id} className="animate-fade-up rounded-3xl border border-white/10 bg-slate-900/70 p-5 shadow-[0_25px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur">
+                <div key={index} className="animate-fade-up rounded-3xl border border-white/10 bg-slate-900/70 p-5 shadow-[0_25px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur">
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-start gap-3">
                       <div className="rounded-2xl border border-white/10 bg-white/5 p-2">
@@ -185,21 +239,21 @@ export default function MachineAlertsPage() {
               <Factory className="h-5 w-5 text-red-400" />
               <p className="text-sm text-slate-400">Active lines</p>
             </div>
-            <p className="mt-3 text-2xl font-semibold">7</p>
+            <p className="mt-3 text-2xl font-semibold">{summary.active_lines}</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-4">
             <div className="flex items-center gap-3">
               <Cpu className="h-5 w-5 text-cyan-400" />
               <p className="text-sm text-slate-400">Connected devices</p>
             </div>
-            <p className="mt-3 text-2xl font-semibold">184</p>
+            <p className="mt-3 text-2xl font-semibold">{summary.connected_devices}</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-4">
             <div className="flex items-center gap-3">
               <Thermometer className="h-5 w-5 text-amber-400" />
               <p className="text-sm text-slate-400">Temperature variance</p>
             </div>
-            <p className="mt-3 text-2xl font-semibold">+1.8°C</p>
+            <p className="mt-3 text-2xl font-semibold">{summary.temperature_variance}</p>
           </div>
         </div>
       </main>

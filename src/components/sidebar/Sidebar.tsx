@@ -10,6 +10,7 @@ import {
   AlertTriangle,
   Sparkles,
   BarChart3,
+  TrendingUp,
   LogOut,
   ChevronDown,
   User,
@@ -24,6 +25,7 @@ const links = [
   { to: "/work-orders", label: "Work Orders", icon: FileText },
   { to: "/machine-alerts", label: "Machine Alerts", icon: AlertTriangle },
   { to: "/insights", label: "AI Insights", icon: Sparkles },
+  { to: "/demand-forecast", label: "Demand Forecast", icon: TrendingUp },
   { to: "/reports", label: "Reports", icon: BarChart3 },
 ];
 

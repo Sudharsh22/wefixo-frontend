@@ -31,4 +31,7 @@ export const apiRoutes = {
   maintenance: "/maintenance",
   workOrders: "/work-orders",
   reports: "/reports",
+  workflows: {
+    demandForecast: "/workflows/demand-forecast"
+  }
 };
