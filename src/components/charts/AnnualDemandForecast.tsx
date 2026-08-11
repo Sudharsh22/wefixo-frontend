@@ -8,7 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Sparkles, TrendingUp, Calendar, ShieldCheck, AlertCircle, ArrowUpRight, ArrowDownRight, Minus } from "lucide-react";
+import { Sparkles, TrendingUp, Calendar, ShieldCheck, ArrowUpRight, ArrowDownRight, Minus } from "lucide-react";
 
 export type WeekForecast = {
   weekNum: number;

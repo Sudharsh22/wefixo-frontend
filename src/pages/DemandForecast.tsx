@@ -67,17 +67,7 @@ export default function DemandForecastPage() {
     fetchForecast();
   }, []);
 
-  const getRiskTone = (level: string) => {
-    switch (level.toLowerCase()) {
-      case "critical":
-      case "high":
-        return "red";
-      case "medium":
-        return "amber";
-      default:
-        return "emerald";
-    }
-  };
+
 
   const riskStyles = {
     critical: "border-red-600/50 bg-red-950/60 text-red-300",

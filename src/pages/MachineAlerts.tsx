@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { AlertTriangle, BellRing, Cpu, Factory, Thermometer } from "lucide-react";
-import { api, apiRoutes } from "../api/api";
+import { api } from "../api/api";
 import Sidebar from "../components/sidebar/Sidebar";
 import EmptyState from "../components/ui/EmptyState";
 import PageHeader from "../components/ui/PageHeader";
@@ -20,68 +20,7 @@ type AlertItem = {
   detectedBy: string;
 };
 
-const alertsSeed: AlertItem[] = [
-  {
-    id: 1,
-    title: "Temperature drift in filler head",
-    machine: "Filler A1",
-    area: "Bottling Line A",
-    severity: "High",
-    message: "Temperature has exceeded the normal operating window for 8 minutes.",
-    timestamp: "2 min ago",
-    detectedBy: "SCADA sensor",
-  },
-  {
-    id: 2,
-    title: "Conveyor belt vibration spike",
-    machine: "Conveyor C3",
-    area: "Packaging Zone",
-    severity: "Critical",
-    message: "Vibration levels are 2.4x above baseline and may indicate bearing wear.",
-    timestamp: "6 min ago",
-    detectedBy: "Vibration monitor",
-  },
-  {
-    id: 3,
-    title: "Labeler jam detected",
-    machine: "Labeler L2",
-    area: "Secondary Packaging",
-    severity: "Medium",
-    message: "A label misalignment event caused a short production pause.",
-    timestamp: "12 min ago",
-    detectedBy: "Vision inspection",
-  },
-  {
-    id: 4,
-    title: "Low coolant pressure",
-    machine: "Cooling Unit CU-2",
-    area: "Utilities",
-    severity: "Low",
-    message: "Pressure remains slightly below target but within acceptable tolerance.",
-    timestamp: "18 min ago",
-    detectedBy: "PLC loop",
-  },
-  {
-    id: 5,
-    title: "Motor current anomaly",
-    machine: "Palletizer P1",
-    area: "Material Handling",
-    severity: "High",
-    message: "Current draw is elevated during the transfer cycle and should be inspected.",
-    timestamp: "24 min ago",
-    detectedBy: "Electrical analytics",
-  },
-  {
-    id: 6,
-    title: "Compressed air leak",
-    machine: "Air Compressor AC-4",
-    area: "Utilities",
-    severity: "Critical",
-    message: "Leak rate is increasing and may affect downstream line performance.",
-    timestamp: "31 min ago",
-    detectedBy: "Pressure sensor",
-  },
-];
+
 
 const severityTone: Record<AlertSeverity, "red" | "amber" | "cyan" | "slate"> = {
   Low: "cyan",
