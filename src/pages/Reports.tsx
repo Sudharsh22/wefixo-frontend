@@ -4,6 +4,8 @@ import Sidebar from "../components/sidebar/Sidebar";
 import PageHeader from "../components/ui/PageHeader";
 import SectionCard from "../components/ui/SectionCard";
 import StatCard from "../components/ui/StatCard";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 type KPI = {
   title: string;
@@ -83,6 +85,68 @@ const statusStyles = {
 };
 
 export default function ReportsPage() {
+  const handleDownloadPDF = (reportType: string) => {
+    const doc = new jsPDF();
+    
+    // Add Coca-Cola Red Branding
+    doc.setFillColor(255, 26, 26);
+    doc.rect(0, 0, 210, 20, "F");
+    
+    // Header
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(16);
+    doc.setFont("helvetica", "bold");
+    doc.text("WEFIXO SMART FACTORY AI", 14, 13);
+    
+    // Report Title
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(22);
+    doc.text(`${reportType} Report`, 14, 35);
+    
+    doc.setFontSize(11);
+    doc.setTextColor(100, 100, 100);
+    doc.text(`Generated on: ${new Date().toLocaleString()}`, 14, 42);
+    
+    // Dummy Data based on Report Type
+    let head = [["Metric", "Value", "Status"]];
+    let body: any[] = [];
+    
+    if (reportType === "Production") {
+      body = [
+        ["Total Volume (Shift)", "14,200 Cases", "On Target"],
+        ["Line Efficiency (OEE)", "92.4%", "Excellent"],
+        ["Defect Rate", "0.08%", "Within limits"],
+        ["Active Lines", "7 / 8", "Warning: 1 Down"]
+      ];
+    } else if (reportType === "Inventory") {
+      body = [
+        ["Raw Materials (Syrup)", "84,000 L", "Healthy"],
+        ["Packaging (Bottles)", "120,000 Units", "Healthy"],
+        ["Labels", "15,000 Units", "Critical: Reorder"],
+        ["CO2 Tanks", "4 Tanks", "Warning"]
+      ];
+    } else if (reportType === "Maintenance") {
+      body = [
+        ["Active Alerts", "4", "Action Required"],
+        ["Resolved Today", "12", "Completed"],
+        ["Mean Time to Repair", "14 mins", "Excellent"],
+        ["Upcoming Scheduled", "Filler A1 Maintenance", "Tomorrow"]
+      ];
+    }
+
+    autoTable(doc, {
+      startY: 50,
+      head: head,
+      body: body,
+      theme: 'grid',
+      headStyles: { fillColor: [255, 26, 26] },
+      styles: { fontSize: 11, cellPadding: 5 },
+    });
+
+    // Save the PDF
+    doc.save(`${reportType}_Report_${new Date().toISOString().split('T')[0]}.pdf`);
+  };
+
   return (
     <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-[radial-gradient(circle_at_top_left,_rgba(220,38,38,0.22),_transparent_35%),linear-gradient(135deg,_#020617_0%,_#0f172a_100%)] text-white font-sans">
       <Sidebar />
@@ -108,8 +172,12 @@ export default function ReportsPage() {
             </p>
 
             <div className="mt-5 flex flex-wrap gap-3">
-              {(["PDF", "Excel", "CSV"] as const).map((format) => (
-                <button key={format} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-slate-200 transition hover:border-red-400/30 hover:text-white">
+              <button onClick={() => handleDownloadPDF("Production")} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-slate-200 transition hover:border-red-400/30 hover:text-white cursor-pointer">
+                <FileDown className="h-4 w-4" />
+                PDF
+              </button>
+              {(["Excel", "CSV"] as const).map((format) => (
+                <button key={format} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-slate-200 transition hover:border-red-400/30 hover:text-white cursor-not-allowed opacity-50">
                   <FileDown className="h-4 w-4" />
                   {format}
                 </button>
@@ -123,8 +191,12 @@ export default function ReportsPage() {
             </p>
 
             <div className="mt-5 flex flex-wrap gap-3">
-              {(["PDF", "Excel", "CSV"] as const).map((format) => (
-                <button key={format} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-slate-200 transition hover:border-red-400/30 hover:text-white">
+              <button onClick={() => handleDownloadPDF("Inventory")} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-slate-200 transition hover:border-red-400/30 hover:text-white cursor-pointer">
+                <FileDown className="h-4 w-4" />
+                PDF
+              </button>
+              {(["Excel", "CSV"] as const).map((format) => (
+                <button key={format} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-slate-200 transition hover:border-red-400/30 hover:text-white cursor-not-allowed opacity-50">
                   <FileDown className="h-4 w-4" />
                   {format}
                 </button>
@@ -138,8 +210,12 @@ export default function ReportsPage() {
             </p>
 
             <div className="mt-5 flex flex-wrap gap-3">
-              {(["PDF", "Excel", "CSV"] as const).map((format) => (
-                <button key={format} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-slate-200 transition hover:border-red-400/30 hover:text-white">
+              <button onClick={() => handleDownloadPDF("Maintenance")} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-slate-200 transition hover:border-red-400/30 hover:text-white cursor-pointer">
+                <FileDown className="h-4 w-4" />
+                PDF
+              </button>
+              {(["Excel", "CSV"] as const).map((format) => (
+                <button key={format} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-slate-200 transition hover:border-red-400/30 hover:text-white cursor-not-allowed opacity-50">
                   <FileDown className="h-4 w-4" />
                   {format}
                 </button>
