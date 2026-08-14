@@ -135,8 +135,8 @@ export default function AnnualDemandForecast() {
               onClick={() => setFilter(item.key)}
               className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
                 filter === item.key
-                  ? "bg-gradient-to-r from-[#ff1a1a] to-[#990000] text-white shadow-[0_0_12px_rgba(255,26,26,0.3)]"
-                  : "text-gray-400 hover:text-white hover:bg-white/[0.04]"
+                  ? "bg-linear-to-r from-[#ff1a1a] to-[#990000] text-white shadow-[0_0_12px_rgba(255,26,26,0.3)]"
+                  : "text-gray-400 hover:text-white hover:bg-white/4"
               }`}
             >
               {item.label}
@@ -203,7 +203,7 @@ export default function AnnualDemandForecast() {
             <span>2.12M Cases • 92% Conf</span>
           </div>
           <div className="flex items-center space-x-1.5">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#8b0000]" />
+            <span className="w-2.5 h-2.5 rounded-sm bg-wefixo-darkred" />
             <span className="font-bold text-white">Q4 (W40–W52):</span>
             <span>1.58M Cases • 89% Conf</span>
           </div>
@@ -211,8 +211,8 @@ export default function AnnualDemandForecast() {
       </div>
 
       {/* Recharts 52-Week Area Line Chart Container */}
-      <div className="h-[320px] w-full sm:h-[360px] overflow-x-auto">
-        <div className="h-full min-w-[700px] w-full">
+      <div className="h-80 w-full sm:h-90 overflow-x-auto">
+        <div className="h-full min-w-175 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={filteredData} margin={{ top: 15, right: 15, left: -15, bottom: 5 }}>
               <defs>
@@ -241,7 +241,7 @@ export default function AnnualDemandForecast() {
                   if (!active || !payload || !payload.length) return null;
                   const d = payload[0].payload as WeekForecast;
                   return (
-                    <div className="rounded-2xl border border-red-500/40 bg-[#0f0f0f]/95 p-4 text-xs shadow-[0_10px_30px_rgba(0,0,0,0.9),0_0_20px_rgba(255,26,26,0.25)] backdrop-blur-md min-w-[210px]">
+                    <div className="rounded-2xl border border-red-500/40 bg-[#0f0f0f]/95 p-4 text-xs shadow-[0_10px_30px_rgba(0,0,0,0.9),0_0_20px_rgba(255,26,26,0.25)] backdrop-blur-md min-w-52.5">
                       <div className="flex items-center justify-between border-b border-red-950/80 pb-2 mb-2">
                         <span className="font-extrabold text-white text-sm">
                           Week {d.weekNum} <span className="text-[#ff1a1a]">({d.quarter})</span>
