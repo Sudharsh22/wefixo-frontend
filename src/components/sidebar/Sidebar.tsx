@@ -40,12 +40,12 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="flex h-auto w-full flex-col border-b border-red-950/80 bg-[#020102] p-4 font-sans md:h-screen md:w-64 md:border-b-0 md:border-r md:p-5 lg:w-64 flex-shrink-0 md:sticky md:top-0 md:left-0 z-30">
-      <div className="flex-shrink-0">
+    <aside className="flex h-auto w-full flex-col border-b border-red-950/80 bg-[#020102] p-4 font-sans md:h-screen md:w-64 md:border-b-0 md:border-r md:p-5 lg:w-64 shrink-0 md:sticky md:top-0 md:left-0 z-30">
+      <div className="shrink-0">
         {/* Brand Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-black tracking-tight text-[#ff1e27] drop-shadow-[0_0_12px_rgba(255,30,39,0.5)]">
+            <h1 className="text-3xl font-black tracking-tight text-wefixo-red drop-shadow-[0_0_12px_rgba(255,30,39,0.5)]">
               WEFIXO
             </h1>
           </div>
@@ -58,7 +58,7 @@ export default function Sidebar() {
         {user ? (
           <div className="mb-4 flex items-center justify-between rounded-xl border border-red-950/90 bg-[#0a0204] p-3 shadow-inner">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600/20 text-[#ff1e27] border border-red-600/40">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600/20 text-wefixo-red border border-red-600/40">
                 <User className="h-5 w-5" />
               </div>
               <div>
@@ -71,7 +71,7 @@ export default function Sidebar() {
         ) : (
           <div className="mb-4 flex items-center justify-between rounded-xl border border-red-950/90 bg-[#0a0204] p-3">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600/20 text-[#ff1e27] border border-red-600/40">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600/20 text-wefixo-red border border-red-600/40">
                 <User className="h-5 w-5" />
               </div>
               <div>
@@ -95,14 +95,14 @@ export default function Sidebar() {
               className={({ isActive }) =>
                 `flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs font-semibold transition-all duration-150 ${
                   isActive
-                    ? "border border-red-700/60 bg-gradient-to-r from-[#2a060a] to-[#140205] text-[#ff1e27] shadow-[0_0_12px_rgba(255,30,39,0.18)]"
+                    ? "border border-red-700/60 bg-linear-to-r from-[#2a060a] to-[#140205] text-wefixo-red shadow-[0_0_12px_rgba(255,30,39,0.18)]"
                     : "text-gray-300 hover:bg-[#120305] hover:text-white"
                 }`
               }
             >
               {({ isActive }) => (
                 <>
-                  <Icon className={`h-4 w-4 ${isActive ? "text-[#ff1e27]" : "text-gray-400"}`} />
+                  <Icon className={`h-4 w-4 ${isActive ? "text-wefixo-red" : "text-gray-400"}`} />
                   <span>{link.label}</span>
                 </>
               )}
@@ -114,7 +114,7 @@ export default function Sidebar() {
       {/* Logout Button */}
       <button
         onClick={handleLogout}
-        className="mt-auto flex w-full items-center justify-center gap-2 rounded-xl border border-red-950/90 bg-[#0a0204] px-4 py-2.5 text-xs font-semibold text-gray-300 transition-all hover:border-red-600/50 hover:bg-[#180306] hover:text-red-400 flex-shrink-0"
+        className="mt-auto flex w-full items-center justify-center gap-2 rounded-xl border border-red-950/90 bg-[#0a0204] px-4 py-2.5 text-xs font-semibold text-gray-300 transition-all hover:border-red-600/50 hover:bg-[#180306] hover:text-red-400 shrink-0"
       >
         <LogOut className="h-4 w-4 text-red-500" />
         <span>Logout</span>

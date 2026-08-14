@@ -77,7 +77,7 @@ export default function DemandForecastPage() {
   };
 
   return (
-    <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-gradient-to-br from-[#050505] via-[#0f0f0f] to-[#2b0000] text-white font-sans">
+    <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-linear-to-br from-[#050505] via-[#0f0f0f] to-[#2b0000] text-white font-sans">
       <Sidebar />
 
       <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 sm:p-6 lg:p-8 space-y-6">
@@ -97,7 +97,7 @@ export default function DemandForecastPage() {
 
         {error && (
           <div className="rounded-xl border border-red-600/50 bg-red-950/30 p-6 flex items-start gap-4">
-            <AlertTriangle className="w-6 h-6 text-[#ff1a1a] flex-shrink-0" />
+            <AlertTriangle className="w-6 h-6 text-[#ff1a1a] shrink-0" />
             <div>
               <h3 className="text-lg font-bold text-red-200">Workflow Error</h3>
               <p className="mt-1 text-sm text-red-300/80">{error}</p>
@@ -211,7 +211,7 @@ export default function DemandForecastPage() {
               <div className="space-y-3">
                 {data.production_attention?.map((item, i) => (
                   <div key={i} className="flex items-start gap-3 rounded-xl border border-red-900/30 bg-[#0f0f0f]/60 p-4">
-                    <BrainCircuit className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#ff1a1a]" />
+                    <BrainCircuit className="mt-0.5 h-4 w-4 shrink-0 text-[#ff1a1a]" />
                     <p className="text-sm text-gray-300 leading-relaxed">
                       <strong>{item.product_name}</strong> is showing an {item.trend} trend. Latest demand is {item.latest_demand}, expected to be {item.forecast_next_month} next month ({item.forecast_confidence} confidence).
                     </p>
