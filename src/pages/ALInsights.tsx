@@ -138,7 +138,7 @@ export default function AIInsightsPage() {
   ];
 
   return (
-    <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-gradient-to-br from-[#050505] via-[#0f0f0f] to-[#2b0000] text-white font-sans">
+    <div className="flex h-screen w-full overflow-hidden flex-col md:flex-row bg-linear-to-br from-[#050505] via-[#0f0f0f] to-[#2b0000] text-white font-sans">
       <Sidebar />
 
       <main className="flex-1 h-full overflow-y-auto overflow-x-hidden p-4 sm:p-6 lg:p-8 space-y-6">
@@ -281,7 +281,7 @@ export default function AIInsightsPage() {
                 key={idx}
                 className="flex items-start gap-3 rounded-xl border border-red-900/30 bg-[#0f0f0f]/60 p-4 transition-all hover:border-red-600/40"
               >
-                <Sparkles className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#ff1a1a]" />
+                <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-[#ff1a1a]" />
                 <p className="text-xs text-gray-300 leading-relaxed">{item}</p>
               </div>
             ))}
